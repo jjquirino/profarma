@@ -1,0 +1,509 @@
+Title;Time;Owner;Asset Name;Severity;Status;Solution;Results
+Microsoft SQL Server Multiple Vulnerabilities for March 2026;BD;Armando Junior;srv20wbd007;3;ACTIVE;"Refer to,
+CVE-2026-26116
+CVE-2026-21262
+CVE-2026-26115(Refer to,
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26116
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-21262
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26115)";"MSSQL 2019 Version is 2019.150.4455.2 Patch Version: 2019.150.4460.4
+"
+Microsoft SQL Server Multiple Vulnerabilities for March 2026;BD;Armando Junior;srv10wbd015;3;ACTIVE;"Refer to,
+CVE-2026-26116
+CVE-2026-21262
+CVE-2026-26115(Refer to,
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26116
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-21262
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26115)";"MSSQL 2022 Version is 2022.160.4215.2 Patch Version: 2022.160.4240.4
+"
+Microsoft SQL Server Elevation of Privilege Vulnerability For November 2025;BD;Armando Junior;srv10wbd015;4;ACTIVE;"Vendor has released the patch, customers are advised to refer to Refer to,
+Microsoft SQL Server Security Advisory (CVE-2025-59499) for further information related to remediating this vulnerability.(Vendor has released the patch, customers are advised to refer to Refer to,
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-59499)";"MSSQL 2022 Version is 2022.160.4215.2 Patch Version: 2022.160.4222.2
+"
+Oracle Java SE Critical Patch Update - October 2021 (CPUOCT2021);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2025 (CPUJAN2025);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2205 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2025.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2023 (CPUOCT2023);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2024 (CPUJUL2024);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2024 (CPUJAN2024);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - January 2021 (CPUJAN2021);BD;Armando Junior;srv10las100;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - April 2021 (CPUAPR2021);BD;Armando Junior;srv10las100;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2023 (CPUAPR2023);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2023 (CPUJUL2023);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - July 2020(CPUJUL2020);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - July 2020 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2020.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2023 (CPUJAN2023);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - January 2020;BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - January 2020 and Oracle Doc ID 2617684.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2617684.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - July 2021 (CPUJUL2021);BD;Armando Junior;srv10las100;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - July 2019;BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates (Java SE JDK and JRE 12.0.2, 11.0.4, Java 8 Update 221 or later, Java SE JDK and JRE 7 Update 231) to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - July 2019 and Oracle Doc ID 2552042.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates (Java SE JDK and JRE 12.0.2, 11.0.4, Java 8 Update 221 or later, Java SE JDK and JRE 7 Update 231) to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2552042.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - October 2020 (CPUOCT2020);BD;Armando Junior;srv10las100;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - July 2020 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2020.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2022 (CPUOCT2022);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2022 (CPUJAN2022);BD;Armando Junior;srv10las100;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - April 2020;BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - April 2020 
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2020.html#AppendixJAVA
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2025 (CPUJAN2025);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2205 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2025.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - October 2020 (CPUOCT2020);BD;Armando Junior;srv10las099;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - July 2020 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2020.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2022 (CPUJAN2022);BD;Armando Junior;srv10las099;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2023 (CPUOCT2023);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2024 (CPUJUL2024);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - April 2021 (CPUAPR2021);BD;Armando Junior;srv10las099;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2022 (CPUOCT2022);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - January 2021 (CPUJAN2021);BD;Armando Junior;srv10las099;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - July 2021 (CPUJUL2021);BD;Armando Junior;srv10las099;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2024 (CPUJAN2024);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - July 2019;BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates (Java SE JDK and JRE 12.0.2, 11.0.4, Java 8 Update 221 or later, Java SE JDK and JRE 7 Update 231) to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - July 2019 and Oracle Doc ID 2552042.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates (Java SE JDK and JRE 12.0.2, 11.0.4, Java 8 Update 221 or later, Java SE JDK and JRE 7 Update 231) to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2552042.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - October 2021 (CPUOCT2021);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2021 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2021.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2023 (CPUAPR2023);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2023 (CPUJAN2023);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - April 2020;BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - April 2020 
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2020.html#AppendixJAVA
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - July 2020(CPUJUL2020);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - July 2020 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2020.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2023 (CPUJUL2023);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July2023 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2023.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - January 2020;BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - January 2020 and Oracle Doc ID 2617684.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2617684.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2025 (CPUJUL2025);BD;Armando Junior;srv10las100;5;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2025 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2025.html)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2026 (CPUJAN2026);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2026 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2026.html)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2024 (CPUAPR2024);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2022 (CPUJUL2022);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2022 (CPUAPR2022);BD;Armando Junior;srv10las100;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2025 (CPUOCT2025);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2025 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2025.html)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2024 (CPUOCT2024);BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2025 (CPUAPR2025);BD;Armando Junior;srv10las100;5;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2025 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2025.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - April 2019;BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates (Java SE JDK and JRE 11.0.3, Java 8 Update 211 or later, Java SE JDK and JRE 7 Update 221) to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU April 2019 and Oracle Doc ID 2518941.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates (Java SE JDK and JRE 11.0.3, Java 8 Update 211 or later, Java SE JDK and JRE 7 Update 221) to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2518941.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - October 2019;BD;Armando Junior;srv10las100;4;ACTIVE;"The vendor has released updates (Java SE JDK and JRE 13.0.1, 11.0.5, Java 8 Update 231 or later, Java SE JDK and JRE 7 Update 241) to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - October 2019 and Oracle Doc ID 2589853.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates (Java SE JDK and JRE 13.0.1, 11.0.5, Java 8 Update 231 or later, Java SE JDK and JRE 7 Update 241) to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2589853.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2025 (CPUAPR2025);BD;Armando Junior;srv10las099;5;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2025 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2025.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2025 (CPUOCT2025);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2025 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2025.html)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - October 2019;BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates (Java SE JDK and JRE 13.0.1, 11.0.5, Java 8 Update 231 or later, Java SE JDK and JRE 7 Update 241) to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU - October 2019 and Oracle Doc ID 2589853.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates (Java SE JDK and JRE 13.0.1, 11.0.5, Java 8 Update 231 or later, Java SE JDK and JRE 7 Update 241) to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2589853.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - October 2024 (CPUOCT2024);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - October 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuoct2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2022 (CPUAPR2022);BD;Armando Junior;srv10las099;3;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java SE Critical Patch Update - April 2019;BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates (Java SE JDK and JRE 11.0.3, Java 8 Update 211 or later, Java SE JDK and JRE 7 Update 221) to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Java SE CPU April 2019 and Oracle Doc ID 2518941.1 to obtain more details.
+
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.(The vendor has released updates (Java SE JDK and JRE 11.0.3, Java 8 Update 211 or later, Java SE JDK and JRE 7 Update 221) to resolve these issues. 
+<P>
+https://support.oracle.com/rs?type=doc&id=2518941.1
+<P>
+Updates for Java 7 are no longer available to the public. Oracle offers updates to Java 7 only for customers who have purchased Java support or have Oracle products that require Java 7.)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - April 2024 (CPUAPR2024);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - April 2024 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpuapr2024.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2022 (CPUJUL2022);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2022 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2022.html#AppendixJAVA)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - July 2025 (CPUJUL2025);BD;Armando Junior;srv10las099;5;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - July 2025 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujul2025.html)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"
+Oracle Java Standard Edition (SE) Critical Patch Update - January 2026 (CPUJAN2026);BD;Armando Junior;srv10las099;4;ACTIVE;"The vendor has released updates to resolve these issues. 
+
+Customers are advised to refer to vendor advisory Oracle Critical Patch Update Advisory - January 2026 (The vendor has released updates to resolve these issues. 
+<P>
+https://www.oracle.com/security-alerts/cpujan2026.html)";"#table cols=""3""
+Install_Location Version Detection_Type 
+/opt/easy2l/jre1.8.0__202__64/bin/java 1.8.0__202-b08 Enhanced
+"

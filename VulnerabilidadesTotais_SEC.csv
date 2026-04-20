@@ -1,0 +1,42 @@
+Title;Time;Owner;Asset Name;Severity;Status;Solution;Results
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;node2;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv20las017;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;node1;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv98las056;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv10las080;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv98las055;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;node3;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv20las015;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv20las016;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv10las100;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+World-Writable Directories Should Have Their Sticky Bits Set;SEC;Armando Junior;srv10las099;1;ACTIVE;It's best practice to set the sticky bit for world-writable directories.(It's best practice to set the sticky bit for world-writable directories.);"/tmp/.dotnet
+/tmp/.dotnet/shm
+"
+Enabled Cached Logon Credential;SEC;Armando Junior;srv10wbd015;2;ACTIVE;"We recommend that you locate the following Registry key, and then set or create a REG_SZ 'CachedLogonsCount' entry with a '0' value:
+
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows Nt\CurrentVersion\Winlogon
+(We recommend that you locate the following Registry key, and then set or create a REG_SZ 'CachedLogonsCount' entry with a '0' value:
+<P>
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows Nt\CurrentVersion\Winlogon
+)";"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon cachedlogonscount = 10
+"
