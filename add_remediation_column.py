@@ -283,7 +283,17 @@ def transform_file(path: Path) -> int:
         if is_vulnerability_line(base, idx):
             parts = base.split(";")
             title = parts[6].strip() if len(parts) > 6 else ""
-            base = f"{base};{remediation_for_title(title)}"
+            action = remediation_for_title(title)
+            action_suffix = f";{action}"
+
+            while base.endswith(f"{action_suffix}{action_suffix}"):
+                base = base[: -len(action_suffix)]
+
+            if base.endswith(";"):
+                base = f"{base}{action}"
+            elif not base.endswith(action_suffix):
+                prefix, separator, _ = base.rpartition(";")
+                base = f"{prefix}{action_suffix}" if separator else f"{base}{action_suffix}"
             vulnerability_rows += 1
 
         transformed.append(base + eol)
