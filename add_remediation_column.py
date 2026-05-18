@@ -76,10 +76,11 @@ def remediation_for_title(title: str) -> str:
                 "Atualizar bootstrap para versão >= 5.x ou aplicar mitigações de CSP. "
                 "Avaliar upgrade para Bootstrap 5."
             )
-        if "ghsa-3mgp" in value:
-            return "Atualizar bootstrap para a versão >= 3.4.0 via npm update bootstrap."
         if ".net" in value or "nuget" in value:
             return "Atualizar pacote NuGet bootstrap para >= 3.4.0 via Update-Package bootstrap."
+        if "ghsa-3mgp" in value:
+            return "Atualizar bootstrap para a versão >= 3.4.0 via npm update bootstrap."
+        return "Atualizar bootstrap para a versão mais recente disponível via npm update bootstrap."
 
     if re.search(r"\bdiff\b", value):
         return "Atualizar o pacote diff para a versão >= 3.5.1 via npm update diff."
@@ -103,6 +104,7 @@ def remediation_for_title(title: str) -> str:
             return "Atualizar js-yaml para >= 3.14.2 via npm update js-yaml."
         if "ghsa-8j8c" in value:
             return "Atualizar js-yaml para >= 3.13.1 via npm update js-yaml."
+        return "Atualizar js-yaml para a versão mais recente via npm update js-yaml."
 
     if "clean-css" in value:
         return "Atualizar o pacote clean-css para a versão >= 4.1.11 via npm update clean-css."
@@ -163,6 +165,7 @@ def remediation_for_title(title: str) -> str:
             return "Atualizar cryptography para >= 44.0.1 via pip install --upgrade cryptography."
         if "ghsa-9v9h" in value:
             return "Atualizar cryptography para >= 42.0.2 via pip install --upgrade cryptography."
+        return FALLBACK_ACTION
 
     if "commons-lang:commons-lang" in value:
         if "ghsa-j288" in value:
@@ -201,6 +204,7 @@ def remediation_for_title(title: str) -> str:
             )
         if "ghsa-wvxc" in value:
             return "Atualizar pacote NuGet Azure.Identity para >= 1.11.0."
+        return FALLBACK_ACTION
 
     if "microsoft.rest.clientruntime" in value:
         return "Atualizar pacote NuGet Microsoft.Rest.ClientRuntime para >= 2.3.24."
@@ -219,12 +223,14 @@ def remediation_for_title(title: str) -> str:
             return "Atualizar org.apache.hadoop:hadoop-common para >= 2.6.5 no pom.xml."
         if "ghsa-f5fw" in value:
             return "Atualizar org.apache.hadoop:hadoop-common para >= 3.4.0 no pom.xml."
+        return FALLBACK_ACTION
 
     if "guava" in value:
         if "ghsa-mvr2" in value:
             return "Atualizar com.google.guava:guava para >= 24.1.1-android no pom.xml."
         if "ghsa-5mg8" in value:
             return "Atualizar com.google.guava:guava para >= 32.0.0-android no pom.xml."
+        return FALLBACK_ACTION
 
     if "hive-exec" in value:
         if "ghsa-2g9q" in value:
@@ -233,6 +239,7 @@ def remediation_for_title(title: str) -> str:
             return "Atualizar org.apache.hive:hive-exec para >= 2.3.3 no pom.xml."
         if "ghsa-c476" in value:
             return "Atualizar org.apache.hive:hive-exec para >= 4.0.1 no pom.xml."
+        return FALLBACK_ACTION
 
     if "org.iq80.snappy" in value or re.search(r"\bsnappy\b", value):
         return "Atualizar org.iq80.snappy:snappy para >= 0.5 no pom.xml."
@@ -259,6 +266,7 @@ def remediation_for_title(title: str) -> str:
             )
         if "cve-2022-22952" in value or "spel" in value:
             return "Atualizar Spring Framework para versão corrigida >= 5.3.x mais recente no pom.xml."
+        return FALLBACK_ACTION
 
     return FALLBACK_ACTION
 
@@ -279,6 +287,7 @@ def transform_file(path: Path) -> int:
 
     transformed = []
     vulnerability_rows = 0
+    header_columns = 0
 
     for idx, original in enumerate(lines):
         base = original.rstrip("\r\n")
@@ -287,6 +296,7 @@ def transform_file(path: Path) -> int:
         if idx == 0 and ";" in base:
             if not base.endswith(";Ação Corretiva"):
                 base = f"{base};Ação Corretiva"
+            header_columns = len(base.split(";"))
             transformed.append(base + eol)
             continue
 
@@ -294,7 +304,11 @@ def transform_file(path: Path) -> int:
             parts = base.split(";")
             title = parts[6].strip() if len(parts) > 6 else ""
             action = remediation_for_title(title)
-            base = ensure_single_remediation_field(base, action)
+            if header_columns and len(parts) >= header_columns:
+                parts[-1] = action
+                base = ";".join(parts)
+            else:
+                base = ensure_single_remediation_field(base, action)
             vulnerability_rows += 1
 
         transformed.append(base + eol)
