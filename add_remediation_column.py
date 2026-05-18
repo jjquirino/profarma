@@ -263,6 +263,25 @@ def remediation_for_title(title: str) -> str:
     return FALLBACK_ACTION
 
 
+def ensure_single_remediation_field(base: str, action: str) -> str:
+    action_suffix = f";{action}"
+
+    while base.endswith(action_suffix):
+        candidate = base[: -len(action_suffix)]
+        if not candidate.endswith(action_suffix):
+            break
+        base = candidate
+
+    if base.endswith(";"):
+        return f"{base}{action}"
+
+    if base.endswith(action_suffix):
+        return base
+
+    prefix, separator, _existing_remediation = base.rpartition(";")
+    return f"{prefix}{action_suffix}" if separator else f"{base}{action_suffix}"
+
+
 def transform_file(path: Path) -> int:
     content, encoding = detect_encoding(path)
     lines = content.splitlines(keepends=True)
@@ -284,16 +303,7 @@ def transform_file(path: Path) -> int:
             parts = base.split(";")
             title = parts[6].strip() if len(parts) > 6 else ""
             action = remediation_for_title(title)
-            action_suffix = f";{action}"
-
-            while base.endswith(f"{action_suffix}{action_suffix}"):
-                base = base[: -len(action_suffix)]
-
-            if base.endswith(";"):
-                base = f"{base}{action}"
-            elif not base.endswith(action_suffix):
-                prefix, separator, _ = base.rpartition(";")
-                base = f"{prefix}{action_suffix}" if separator else f"{base}{action_suffix}"
+            base = ensure_single_remediation_field(base, action)
             vulnerability_rows += 1
 
         transformed.append(base + eol)
