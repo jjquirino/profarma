@@ -307,6 +307,8 @@ def transform_file(path: Path) -> int:
             if header_columns and len(parts) == header_columns:
                 parts[-1] = action
                 base = ";".join(parts)
+            elif header_columns and len(parts) == header_columns - 1:
+                base = f"{base};{action}"
             else:
                 base = ensure_single_remediation_field(base, action)
             vulnerability_rows += 1
