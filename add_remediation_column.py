@@ -304,7 +304,7 @@ def transform_file(path: Path) -> int:
             parts = base.split(";")
             title = parts[6].strip() if len(parts) > 6 else ""
             action = remediation_for_title(title)
-            if header_columns and len(parts) >= header_columns:
+            if header_columns and len(parts) == header_columns:
                 parts[-1] = action
                 base = ";".join(parts)
             else:
