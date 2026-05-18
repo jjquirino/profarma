@@ -263,6 +263,16 @@ def remediation_for_title(title: str) -> str:
     return FALLBACK_ACTION
 
 
+def ensure_single_remediation_field(base: str, action: str) -> str:
+    action_suffix = f";{action}"
+
+    while base.endswith(action_suffix):
+        base = base[: -len(action_suffix)]
+
+    normalized_base = base.rstrip(";")
+    return f"{normalized_base}{action_suffix}" if normalized_base else action_suffix
+
+
 def transform_file(path: Path) -> int:
     content, encoding = detect_encoding(path)
     lines = content.splitlines(keepends=True)
@@ -283,7 +293,8 @@ def transform_file(path: Path) -> int:
         if is_vulnerability_line(base, idx):
             parts = base.split(";")
             title = parts[6].strip() if len(parts) > 6 else ""
-            base = f"{base};{remediation_for_title(title)}"
+            action = remediation_for_title(title)
+            base = ensure_single_remediation_field(base, action)
             vulnerability_rows += 1
 
         transformed.append(base + eol)
