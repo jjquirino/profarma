@@ -266,16 +266,10 @@ def remediation_for_title(title: str) -> str:
 def ensure_single_remediation_field(base: str, action: str) -> str:
     action_suffix = f";{action}"
 
-    while base.endswith(f"{action_suffix}{action_suffix}"):
+    while base.endswith(action_suffix):
         base = base[: -len(action_suffix)]
 
-    if base.endswith(";"):
-        return f"{base}{action}"
-
-    if base.endswith(action_suffix):
-        return base
-
-    return f"{base}{action_suffix}"
+    return f"{base}{action}" if base.endswith(";") else f"{base}{action_suffix}"
 
 
 def transform_file(path: Path) -> int:
