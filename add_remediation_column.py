@@ -269,7 +269,8 @@ def ensure_single_remediation_field(base: str, action: str) -> str:
     while base.endswith(action_suffix):
         base = base[: -len(action_suffix)]
 
-    return f"{base}{action}" if base.endswith(";") else f"{base}{action_suffix}"
+    normalized_base = base.rstrip(";")
+    return f"{normalized_base}{action_suffix}" if normalized_base else action
 
 
 def transform_file(path: Path) -> int:
