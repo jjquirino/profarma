@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demandas de TI — Painel Sidebar</title>
+  <style>
+    /* ===========================
+       Variáveis CSS
+    =========================== */
+    :root {
+      --sidebar-width: 260px;
+      --header-height: 58px;
+
+      --color-sidebar-bg: #0f172a;
+      --color-sidebar-text: #94a3b8;
+      --color-sidebar-heading: #cbd5e1;
+      --color-sidebar-active: #14b8a6;
+      --color-sidebar-border: rgba(255,255,255,0.07);
+
+      --color-bg: #f8fafc;
+      --color-surface: #ffffff;
+      --color-border: #e2e8f0;
+      --color-text: #1e293b;
+      --color-text-muted: #64748b;
+
+      --color-teal: #14b8a6;
+      --color-teal-dark: #0f766e;
+      --color-teal-light: #ccfbf1;
+
+      --color-critica: #dc2626;
+      --color-critica-bg: #fef2f2;
+      --color-critica-border: #fca5a5;
+      --color-alta: #ea580c;
+      --color-alta-bg: #fff7ed;
+      --color-media: #2563eb;
+      --color-media-bg: #eff6ff;
+
+      --color-dev: #7c3aed;
+      --color-dev-bg: #f5f3ff;
+      --color-suporte: #0891b2;
+      --color-suporte-bg: #ecfeff;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --radius: 10px;
+      --radius-sm: 6px;
+      --transition: 0.18s ease;
+    }
+
+    /* ===========================
+       Reset & Base
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: 14px;
+      overflow-x: hidden;
+    }
+
+    /* ===========================
+       Header
+    =========================== */
+    .app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 16px;
+      z-index: 300;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition);
+    }
+
+    .hamburger-btn:hover { background: var(--color-bg); }
+
+    @media (max-width: 768px) {
+      .hamburger-btn { display: flex; align-items: center; justify-content: center; }
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-icon {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #14b8a6, #0891b2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .brand-name span { color: var(--color-teal); }
+
+    .header-spacer { flex: 1; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .user-info:hover { background: var(--color-bg); }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-teal), #0891b2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .user-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    @media (max-width: 540px) { .user-name { display: none; } }
+
+    .btn-nova {
+      background: var(--color-teal);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-nova:hover { background: var(--color-teal-dark); }
+
+    /* ===========================
+       Layout Principal
+    =========================== */
+    .app-body {
+      display: flex;
+      margin-top: var(--header-height);
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* ===========================
+       Sidebar
+    =========================== */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--color-sidebar-bg);
+      flex-shrink: 0;
+      position: fixed;
+      top: var(--header-height);
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      z-index: 200;
+      transition: transform var(--transition);
+    }
+
+    /* Sidebar scrollbar */
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 150;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar-overlay.open {
+        display: block;
+      }
+    }
+
+    .sidebar-section {
+      padding: 20px 16px 8px;
+    }
+
+    .sidebar-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(148,163,184,0.5);
+      margin-bottom: 10px;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-sidebar-heading);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--color-sidebar-text);
+      font-size: 13px;
+      transition: all var(--transition);
+      position: relative;
+    }
+
+    .filter-option:hover {
+      background: rgba(255,255,255,0.05);
+      color: #e2e8f0;
+    }
+
+    .filter-option input[type="radio"],
+    .filter-option input[type="checkbox"] {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid rgba(148,163,184,0.4);
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: border-color var(--transition);
+    }
+
+    .filter-option input[type="radio"]:checked {
+      border-color: var(--color-teal);
+      background: var(--color-teal);
+      box-shadow: 0 0 0 3px rgba(20,184,166,0.2);
+    }
+
+    .filter-option input[type="radio"]:checked::after {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .filter-option input[type="checkbox"] {
+      border-radius: 3px;
+    }
+
+    .filter-option input[type="checkbox"]:checked {
+      border-color: var(--color-teal);
+      background: var(--color-teal);
+    }
+
+    .filter-option input[type="checkbox"]:checked::after {
+      content: '✓';
+      font-size: 9px;
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .filter-option .option-badge {
+      margin-left: auto;
+      font-size: 10px;
+      background: rgba(255,255,255,0.08);
+      padding: 1px 6px;
+      border-radius: 10px;
+      color: rgba(148,163,184,0.8);
+    }
+
+    .sidebar-select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--color-sidebar-border);
+      color: var(--color-sidebar-text);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      outline: none;
+    }
+
+    .sidebar-select option { background: #1e293b; }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--color-sidebar-border);
+      margin: 4px 16px;
+    }
+
+    .btn-clear-filters {
+      display: block;
+      width: calc(100% - 32px);
+      margin: 12px 16px 20px;
+      padding: 9px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--color-sidebar-border);
+      color: var(--color-sidebar-text);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      transition: all var(--transition);
+    }
+
+    .btn-clear-filters:hover {
+      background: rgba(20,184,166,0.15);
+      border-color: var(--color-teal);
+      color: var(--color-teal);
+    }
+
+    /* ===========================
+       Conteúdo Principal
+    =========================== */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 24px;
+      min-width: 0;
+    }
+
+    @media (max-width: 768px) {
+      .main-content { margin-left: 0; padding: 16px; }
+    }
+
+    /* ===========================
+       Métricas
+    =========================== */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .metric-tile {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .metric-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .metric-tile-value {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--color-text);
+    }
+
+    .metric-tile-label {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .metric-tile-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    /* ===========================
+       Seção Críticos
+    =========================== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-count {
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--color-critica-bg);
+      color: var(--color-critica);
+      padding: 2px 9px;
+      border-radius: 20px;
+      border: 1px solid var(--color-critica-border);
+    }
+
+    .btn-ver-todas {
+      font-size: 12px;
+      color: var(--color-teal);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .criticos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .critico-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-critica-border);
+      border-left: 4px solid var(--color-critica);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .critico-card:hover {
+      transform: translateX(3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .critico-card.hidden { display: none; }
+
+    .critico-num {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--color-critica);
+      min-width: 34px;
+    }
+
+    .critico-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .critico-tema {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .critico-meta {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-top: 3px;
+    }
+
+    .critico-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    /* ===========================
+       Badges
+    =========================== */
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .badge-dev      { background: var(--color-dev-bg);     color: var(--color-dev);     }
+    .badge-suporte  { background: var(--color-suporte-bg); color: var(--color-suporte); }
+    .badge-critica  { background: var(--color-critica-bg); color: var(--color-critica); }
+    .badge-alta     { background: var(--color-alta-bg);    color: var(--color-alta);    }
+    .badge-media    { background: var(--color-media-bg);   color: var(--color-media);   }
+    .badge-backlog  { background: #f1f5f9; color: #475569; }
+    .badge-andamento{ background: #dbeafe; color: #1d4ed8; }
+    .badge-aprovacao{ background: #fef9c3; color: #854d0e; }
+    .badge-concluida{ background: #dcfce7; color: #15803d; }
+
+    /* ===========================
+       Tabela
+    =========================== */
+    .table-section {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .table-toolbar {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .table-title {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .table-count-badge {
+      font-size: 11px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      padding: 1px 7px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    thead th {
+      background: #f8fafc;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f1f5f9;
+      transition: background var(--transition);
+    }
+
+    tbody tr:hover { background: #f8fafc; }
+
+    tbody tr.hidden { display: none; }
+
+    tbody td {
+      padding: 11px 14px;
+      font-size: 13px;
+      color: var(--color-text);
+      vertical-align: middle;
+    }
+
+    .td-num {
+      font-weight: 700;
+      color: var(--color-text-muted);
+      font-size: 12px;
+    }
+
+    .td-tema {
+      font-weight: 600;
+      max-width: 220px;
+    }
+
+    .td-tema span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .td-focal { color: var(--color-text-muted); font-size: 12px; white-space: nowrap; }
+
+    .td-actions {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .action-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .action-btn:hover { background: var(--color-bg); color: var(--color-text); }
+    .action-btn.danger:hover { background: var(--color-critica-bg); color: var(--color-critica); }
+
+    /* ===========================
+       Paginação
+    =========================== */
+    .pagination {
+      padding: 12px 16px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pagination-info {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .page-btn {
+      height: 30px;
+      min-width: 30px;
+      padding: 0 8px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: all var(--transition);
+    }
+
+    .page-btn:hover:not(:disabled) {
+      background: var(--color-teal-light);
+      border-color: var(--color-teal);
+      color: var(--color-teal-dark);
+    }
+
+    .page-btn.active {
+      background: var(--color-teal);
+      border-color: var(--color-teal);
+      color: #fff;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ===========================
+       Tooltip
+    =========================== */
+    [data-tooltip] {
+      position: relative;
+      cursor: default;
+    }
+
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #fff;
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: var(--radius-sm);
+      white-space: normal;
+      max-width: 220px;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 100;
+      line-height: 1.4;
+    }
+
+    [data-tooltip]:hover::after { opacity: 1; }
+
+    /* ===========================
+       Empty state
+    =========================== */
+    .table-empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--color-text-muted);
+      display: none;
+    }
+
+    .table-empty.visible { display: block; }
+
+    .table-empty-icon { font-size: 32px; margin-bottom: 8px; }
+
+    .criticos-empty {
+      text-align: center;
+      padding: 20px;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      display: none;
+    }
+
+    .criticos-empty.visible { display: block; }
+
+    /* ===========================
+       Responsivo extra
+    =========================== */
+    @media (max-width: 540px) {
+      .metrics-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .metric-tile { padding: 12px; }
+      .metric-tile-value { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Overlay para mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===========================
+     HEADER
+=========================== -->
+<header class="app-header">
+  <!-- Botão hamburguer (mobile) -->
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menu de filtros" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <a class="header-brand" href="#" aria-label="Demandas TI - Início">
+    <div class="brand-icon" aria-hidden="true">
+      <!-- Ícone SVG inline -->
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M2 8l4 4 8-8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="brand-name">Demandas <span>TI</span></span>
+  </a>
+
+  <div class="header-spacer"></div>
+
+  <div class="header-right">
+    <button class="btn-nova" id="btnNova" aria-label="Nova Demanda">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Nova Demanda
+    </button>
+
+    <div class="user-info" title="Julielle Pereira de Sa Santos">
+      <div class="user-avatar" aria-hidden="true">JP</div>
+      <span class="user-name">Julielle Pereira</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===========================
+     BODY: Sidebar + Conteúdo
+=========================== -->
+<div class="app-body">
+
+  <!-- ===========================
+       SIDEBAR
+  =========================== -->
+  <aside class="sidebar" id="sidebar" role="complementary" aria-label="Filtros">
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Filtros</div>
+
+      <!-- Filtro Status -->
+      <div class="filter-group">
+        <span class="filter-group-label">Status TI</span>
+
+        <label class="filter-option">
+          <input type="radio" name="fStatus" value="" checked /> Todos
+          <span class="option-badge" id="badge-status-all">10</span>
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fStatus" value="Backlog" /> Backlog
+          <span class="option-badge">3</span>
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fStatus" value="Aguardando Aprovação" /> Ag. Aprovação
+          <span class="option-badge">1</span>
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fStatus" value="Em andamento" /> Em Andamento
+          <span class="option-badge">4</span>
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fStatus" value="Concluída" /> Concluída
+          <span class="option-badge">2</span>
+        </label>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Filtro Área -->
+      <div class="filter-group" style="margin-top:16px;">
+        <span class="filter-group-label">Área</span>
+        <label class="filter-option">
+          <input type="radio" name="fArea" value="" checked /> Todas
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fArea" value="DEV" /> DEV
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fArea" value="Suporte" /> Suporte
+        </label>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Filtro Prioridade -->
+      <div class="filter-group" style="margin-top:16px;">
+        <span class="filter-group-label">Prioridade</span>
+        <label class="filter-option">
+          <input type="radio" name="fPrio" value="" checked /> Todas
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fPrio" value="Crítica" /> 🔴 Crítica
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fPrio" value="Alta" /> 🟠 Alta
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="fPrio" value="Média" /> 🔵 Média
+        </label>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Filtro Mês/Ano -->
+      <div class="filter-group" style="margin-top:16px;">
+        <span class="filter-group-label">Mês / Ano</span>
+        <select class="sidebar-select" id="fMes" aria-label="Filtrar por mês">
+          <option value="">Todos os meses</option>
+          <option value="Junho/2026">Junho/2026</option>
+          <option value="Julho/2026">Julho/2026</option>
+          <option value="Agosto/2026">Agosto/2026</option>
+          <option value="Setembro/2026">Setembro/2026</option>
+        </select>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Filtro Pendências -->
+      <div class="filter-group" style="margin-top:16px;">
+        <span class="filter-group-label">Pendências</span>
+        <label class="filter-option">
+          <input type="checkbox" id="fPendencias" /> Com pendências
+        </label>
+      </div>
+    </div>
+
+    <!-- Botão limpar -->
+    <button class="btn-clear-filters" id="btnLimparFiltros">
+      ✕ Limpar Filtros
+    </button>
+
+  </aside>
+
+  <!-- ===========================
+       CONTEÚDO PRINCIPAL
+  =========================== -->
+  <main class="main-content" role="main">
+
+    <!-- Métricas -->
+    <section class="metrics-row" aria-label="Resumo de métricas">
+      <div class="metric-tile">
+        <div class="metric-tile-icon" aria-hidden="true">📋</div>
+        <div class="metric-tile-value" data-target="41">41</div>
+        <div class="metric-tile-label">Total de Demandas</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-icon" aria-hidden="true">⚡</div>
+        <div class="metric-tile-value" data-target="12">12</div>
+        <div class="metric-tile-label">Em Andamento</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-icon" aria-hidden="true">✅</div>
+        <div class="metric-tile-value" data-target="19">19</div>
+        <div class="metric-tile-label">Concluídas</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-icon" aria-hidden="true">🔴</div>
+        <div class="metric-tile-value" style="color:var(--color-critica);" data-target="11">11</div>
+        <div class="metric-tile-label">Críticas</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-icon" aria-hidden="true">⚠️</div>
+        <div class="metric-tile-value" style="color:#d97706;" data-target="7">7</div>
+        <div class="metric-tile-label">Com Pendências</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-tile-icon" aria-hidden="true">🎯</div>
+        <div class="metric-tile-value" style="color:var(--color-teal);" data-target="11">11</div>
+        <div class="metric-tile-label">No Tático</div>
+      </div>
+    </section>
+
+    <!-- Seção Críticos -->
+    <section aria-labelledby="sectionCriticosTitle">
+      <div class="section-header">
+        <h2 class="section-title" id="sectionCriticosTitle">
+          ⚡ Demandas Críticas
+          <span class="section-count" id="criticosCount">3</span>
+        </h2>
+        <button class="btn-ver-todas">Ver todas</button>
+      </div>
+
+      <div class="criticos-list" id="criticosList" aria-live="polite">
+        <!-- Cards críticos serão inseridos aqui pelo JS -->
+      </div>
+      <div class="criticos-empty" id="criticosEmpty">
+        <span aria-hidden="true">🎉</span> Nenhuma demanda crítica nos filtros atuais.
+      </div>
+    </section>
+
+    <!-- Seção Tabela -->
+    <section class="table-section" aria-labelledby="sectionDemandasTitle">
+      <div class="table-toolbar">
+        <h2 class="table-title" id="sectionDemandasTitle">
+          📋 Demais Demandas
+          <span class="table-count-badge" id="tableCount">0</span>
+        </h2>
+      </div>
+
+      <div class="table-wrapper" role="region" aria-label="Tabela de demandas">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tema</th>
+              <th scope="col">Área</th>
+              <th scope="col">Prioridade</th>
+              <th scope="col">Status TI</th>
+              <th scope="col">Status Neg.</th>
+              <th scope="col">Focal</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="demandasTableBody" aria-live="polite">
+            <!-- Linhas inseridas pelo JS -->
+          </tbody>
+        </table>
+        <div class="table-empty" id="tableEmpty">
+          <div class="table-empty-icon" aria-hidden="true">🔍</div>
+          <p>Nenhuma demanda encontrada com os filtros atuais.</p>
+        </div>
+      </div>
+
+      <!-- Paginação -->
+      <div class="pagination" id="paginationArea" aria-label="Paginação">
+        <span class="pagination-info" id="paginationInfo"></span>
+        <div class="pagination-controls" id="paginationControls" role="navigation" aria-label="Controles de página">
+          <!-- Botões inseridos pelo JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+  /* ----------------------------
+     Dados das Demandas
+  ---------------------------- */
+  const demandas = [
+    { id: 49, area: 'Suporte', tema: 'Implantação de Controle e Rastreamento',  prioridade: 'Alta',    status: 'Backlog',              statusNeg: 'Aguardando', mes: 'Julho/2026',    focal: 'Lucival Klaydson',   pendencia: false },
+    { id: 47, area: 'DEV',     tema: 'Serviço SAP Custo Médio',                 prioridade: 'Alta',    status: 'Backlog',              statusNeg: 'Aguardando', mes: 'Julho/2026',    focal: 'Jose Borba',         pendencia: false },
+    { id: 46, area: 'DEV',     tema: 'Conciliador PBM – Ajuste no Processo',    prioridade: 'Crítica', status: 'Aguardando Aprovação', statusNeg: 'Aguardando', mes: 'Julho/2026',    focal: 'Fabio Martins',      pendencia: true  },
+    { id: 45, area: 'DEV',     tema: 'Crawler de Imagens de Produtos',           prioridade: 'Alta',    status: 'Em andamento',         statusNeg: 'Aguardando', mes: 'Julho/2026',    focal: 'Humberto Erler',     pendencia: false },
+    { id: 43, area: 'DEV',     tema: 'Revisão da Arquitetura de Sincronização',  prioridade: 'Crítica', status: 'Em andamento',         statusNeg: 'Aguardando', mes: 'Agosto/2026',   focal: 'Alexandre Henrique', pendencia: true  },
+    { id: 42, area: 'DEV',     tema: 'Hub de Imagens – Ajustes e Melhorias',    prioridade: 'Alta',    status: 'Concluída',            statusNeg: 'Concluído',  mes: 'Junho/2026',    focal: 'Alexandre Henrique', pendencia: false },
+    { id: 41, area: 'DEV',     tema: 'Pipeline de Dados Analytics',              prioridade: 'Média',   status: 'Em andamento',         statusNeg: 'Aguardando', mes: 'Julho/2026',    focal: 'Bruno Souza',        pendencia: true  },
+    { id: 40, area: 'Suporte', tema: 'Atualização de Certificados SSL',          prioridade: 'Alta',    status: 'Concluída',            statusNeg: 'Concluído',  mes: 'Junho/2026',    focal: 'Carla Mendes',       pendencia: false },
+    { id: 39, area: 'DEV',     tema: 'Integração API Marketplace',               prioridade: 'Crítica', status: 'Em andamento',         statusNeg: 'Aguardando', mes: 'Agosto/2026',   focal: 'Pedro Lima',         pendencia: true  },
+    { id: 38, area: 'DEV',     tema: 'Refatoração Módulo Financeiro',            prioridade: 'Média',   status: 'Backlog',              statusNeg: 'Aguardando', mes: 'Setembro/2026', focal: 'Ana Paula',          pendencia: false },
+  ];
+
+  /* ----------------------------
+     Paginação
+  ---------------------------- */
+  const PAGE_SIZE = 5;
+  let currentPage = 1;
+  let filteredNaoCriticos = [];
+
+  /* ----------------------------
+     Helpers de badge
+  ---------------------------- */
+  function areaBadge(area) {
+    const cls = area === 'DEV' ? 'badge-dev' : 'badge-suporte';
+    return `<span class="badge ${cls}">${area}</span>`;
+  }
+
+  function prioBadge(p) {
+    const map = { 'Crítica': 'badge-critica', 'Alta': 'badge-alta', 'Média': 'badge-media', 'Baixa': 'badge-media' };
+    return `<span class="badge ${map[p] || ''}">${p}</span>`;
+  }
+
+  function statusBadge(s) {
+    const map = {
+      'Backlog': 'badge-backlog',
+      'Aguardando Aprovação': 'badge-aprovacao',
+      'Em andamento': 'badge-andamento',
+      'Concluída': 'badge-concluida',
+    };
+    return `<span class="badge ${map[s] || 'badge-backlog'}">${s}</span>`;
+  }
+
+  function statusNegBadge(s) {
+    if (s === 'Concluído') return `<span class="badge badge-concluida">${s}</span>`;
+    return `<span class="badge badge-backlog">${s}</span>`;
+  }
+
+  /* ----------------------------
+     Renderizar críticos
+  ---------------------------- */
+  function renderCriticos(data) {
+    const list = document.getElementById('criticosList');
+    const emptyEl = document.getElementById('criticosEmpty');
+    const countEl = document.getElementById('criticosCount');
+
+    list.innerHTML = '';
+
+    const criticos = data.filter(d => d.prioridade === 'Crítica');
+    countEl.textContent = criticos.length;
+
+    if (criticos.length === 0) {
+      emptyEl.classList.add('visible');
+      return;
+    }
+
+    emptyEl.classList.remove('visible');
+
+    criticos.forEach(d => {
+      const card = document.createElement('article');
+      card.className = 'critico-card';
+      card.setAttribute('aria-label', `Demanda crítica ${d.id}: ${d.tema}`);
+      card.innerHTML = `
+        <span class="critico-num">#${d.id}</span>
+        <div class="critico-info">
+          <div class="critico-tema" data-tooltip="${d.tema}">${d.tema}</div>
+          <div class="critico-meta">
+            ${areaBadge(d.area)}&nbsp;&nbsp;${d.focal} &bull; ${d.mes}
+          </div>
+        </div>
+        <div class="critico-status">
+          ${statusBadge(d.status)}
+        </div>
+      `;
+      list.appendChild(card);
+    });
+  }
+
+  /* ----------------------------
+     Renderizar tabela
+  ---------------------------- */
+  function renderTabela(data, page) {
+    const tbody = document.getElementById('demandasTableBody');
+    const emptyEl = document.getElementById('tableEmpty');
+    const countEl = document.getElementById('tableCount');
+
+    tbody.innerHTML = '';
+
+    const naoCriticos = data.filter(d => d.prioridade !== 'Crítica');
+    filteredNaoCriticos = naoCriticos;
+    countEl.textContent = naoCriticos.length;
+
+    if (naoCriticos.length === 0) {
+      emptyEl.classList.add('visible');
+      renderPaginacao(0, page);
+      return;
+    }
+
+    emptyEl.classList.remove('visible');
+
+    const start = (page - 1) * PAGE_SIZE;
+    const end   = Math.min(start + PAGE_SIZE, naoCriticos.length);
+    const slice = naoCriticos.slice(start, end);
+
+    slice.forEach(d => {
+      const tr = document.createElement('tr');
+      tr.dataset.id = d.id;
+      tr.innerHTML = `
+        <td class="td-num">#${d.id}</td>
+        <td class="td-tema">
+          <span data-tooltip="${d.tema}">${d.tema}</span>
+        </td>
+        <td>${areaBadge(d.area)}</td>
+        <td>${prioBadge(d.prioridade)}</td>
+        <td>${statusBadge(d.status)}</td>
+        <td>${statusNegBadge(d.statusNeg)}</td>
+        <td class="td-focal">${d.focal}</td>
+        <td>
+          <div class="td-actions">
+            <button class="action-btn" title="Ver detalhes" aria-label="Ver detalhes da demanda ${d.id}">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M7.5 7v3.5M7.5 5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button class="action-btn" title="Editar" aria-label="Editar demanda ${d.id}">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <path d="M2 10.5L10.5 2l2.5 2.5L4.5 13 2 13.5 2 10.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="action-btn danger" title="Excluir" aria-label="Excluir demanda ${d.id}">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <path d="M2 4h11M5 4V2.5h5V4M6 7v4M9 7v4M3.5 4l.8 9h7.4l.8-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    renderPaginacao(naoCriticos.length, page);
+  }
+
+  /* ----------------------------
+     Paginação
+  ---------------------------- */
+  function renderPaginacao(total, page) {
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    const infoEl = document.getElementById('paginationInfo');
+    const ctrlEl = document.getElementById('paginationControls');
+
+    const start = total === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+    const end   = Math.min(page * PAGE_SIZE, total);
+    infoEl.textContent = total === 0 ? 'Nenhum resultado' : `Exibindo ${start}–${end} de ${total}`;
+
+    ctrlEl.innerHTML = '';
+
+    // Botão Anterior
+    const btnPrev = document.createElement('button');
+    btnPrev.className = 'page-btn';
+    btnPrev.textContent = '← Anterior';
+    btnPrev.disabled = page <= 1;
+    btnPrev.setAttribute('aria-label', 'Página anterior');
+    btnPrev.addEventListener('click', () => goToPage(page - 1));
+    ctrlEl.appendChild(btnPrev);
+
+    // Números de página
+    for (let p = 1; p <= totalPages; p++) {
+      const btn = document.createElement('button');
+      btn.className = 'page-btn' + (p === page ? ' active' : '');
+      btn.textContent = p;
+      btn.setAttribute('aria-label', `Página ${p}`);
+      if (p === page) btn.setAttribute('aria-current', 'page');
+      btn.addEventListener('click', () => goToPage(p));
+      ctrlEl.appendChild(btn);
+    }
+
+    // Botão Próximo
+    const btnNext = document.createElement('button');
+    btnNext.className = 'page-btn';
+    btnNext.textContent = 'Próxima →';
+    btnNext.disabled = page >= totalPages;
+    btnNext.setAttribute('aria-label', 'Próxima página');
+    btnNext.addEventListener('click', () => goToPage(page + 1));
+    ctrlEl.appendChild(btnNext);
+  }
+
+  function goToPage(page) {
+    currentPage = page;
+    renderTabela(getFiltered(), page);
+  }
+
+  /* ----------------------------
+     Coletar filtros ativos
+  ---------------------------- */
+  function getFilters() {
+    const status    = document.querySelector('input[name="fStatus"]:checked')?.value || '';
+    const area      = document.querySelector('input[name="fArea"]:checked')?.value   || '';
+    const prio      = document.querySelector('input[name="fPrio"]:checked')?.value   || '';
+    const mes       = document.getElementById('fMes').value;
+    const pendencia = document.getElementById('fPendencias').checked;
+    return { status, area, prio, mes, pendencia };
+  }
+
+  function getFiltered() {
+    const { status, area, prio, mes, pendencia } = getFilters();
+    return demandas.filter(d => {
+      if (status    && d.status     !== status)    return false;
+      if (area      && d.area       !== area)      return false;
+      if (prio      && d.prioridade !== prio)      return false;
+      if (mes       && d.mes        !== mes)       return false;
+      if (pendencia && !d.pendencia)               return false;
+      return true;
+    });
+  }
+
+  /* ----------------------------
+     Aplicar filtros
+  ---------------------------- */
+  function applyFilters() {
+    currentPage = 1;
+    const filtered = getFiltered();
+    renderCriticos(filtered);
+    renderTabela(filtered, currentPage);
+  }
+
+  /* ----------------------------
+     Sidebar mobile
+  ---------------------------- */
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebarOverlay').classList.add('open');
+    document.getElementById('hamburgerBtn').setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+    document.getElementById('hamburgerBtn').setAttribute('aria-expanded', 'false');
+  }
+
+  /* ----------------------------
+     Inicialização
+  ---------------------------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Render inicial
+    applyFilters();
+
+    // Escuta mudanças nos filtros
+    document.querySelectorAll('input[name="fStatus"], input[name="fArea"], input[name="fPrio"]')
+      .forEach(el => el.addEventListener('change', applyFilters));
+
+    document.getElementById('fMes').addEventListener('change', applyFilters);
+    document.getElementById('fPendencias').addEventListener('change', applyFilters);
+
+    // Limpar filtros
+    document.getElementById('btnLimparFiltros').addEventListener('click', () => {
+      document.querySelectorAll('input[type="radio"][value=""]').forEach(r => { r.checked = true; });
+      document.getElementById('fMes').value = '';
+      document.getElementById('fPendencias').checked = false;
+      applyFilters();
+    });
+
+    // Sidebar mobile
+    document.getElementById('hamburgerBtn').addEventListener('click', openSidebar);
+    document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+
+    // Fechar sidebar com Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+
+    // Botão "Nova Demanda" (simulado)
+    document.getElementById('btnNova').addEventListener('click', () => {
+      alert('✨ Funcionalidade "Nova Demanda" — em protótipo, abriria um formulário de criação.');
+    });
+
+    // Hover highlight table rows
+    document.getElementById('demandasTableBody').addEventListener('mouseover', e => {
+      const tr = e.target.closest('tr');
+      if (tr) tr.style.background = '#f0fdf4';
+    });
+    document.getElementById('demandasTableBody').addEventListener('mouseout', e => {
+      const tr = e.target.closest('tr');
+      if (tr) tr.style.background = '';
+    });
+  });
+</script>
+
+</body>
+</html>

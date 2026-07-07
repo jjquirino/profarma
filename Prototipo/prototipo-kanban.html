@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demandas de TI — Kanban</title>
+  <style>
+    /* ===========================
+       Variáveis CSS
+    =========================== */
+    :root {
+      --color-header-bg: #1e1b4b;
+      --color-header-accent: #4f46e5;
+      --color-header-text: #e0e7ff;
+      --color-bg: #f1f5f9;
+      --color-surface: #ffffff;
+      --color-border: #e2e8f0;
+      --color-text: #1e293b;
+      --color-text-muted: #64748b;
+
+      --color-critica: #dc2626;
+      --color-critica-bg: #fef2f2;
+      --color-alta: #ea580c;
+      --color-alta-bg: #fff7ed;
+      --color-media: #2563eb;
+      --color-media-bg: #eff6ff;
+      --color-baixa: #16a34a;
+      --color-baixa-bg: #f0fdf4;
+
+      --color-dev: #7c3aed;
+      --color-dev-bg: #f5f3ff;
+      --color-suporte: #0891b2;
+      --color-suporte-bg: #ecfeff;
+
+      --color-primary: #4f46e5;
+      --color-primary-hover: #4338ca;
+
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.12);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    /* ===========================
+       Reset & Base
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    /* ===========================
+       Header
+    =========================== */
+    .header {
+      background: var(--color-header-bg);
+      color: var(--color-header-text);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .header-logo svg {
+      color: #818cf8;
+    }
+
+    .header-logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .header-logo-text span {
+      color: #818cf8;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 4px;
+      margin-left: 24px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    .nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .nav-btn.active { background: rgba(79,70,229,0.4); color: #a5b4fc; }
+
+    .header-spacer { flex: 1; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-nova {
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      padding: 7px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-nova:hover { background: var(--color-primary-hover); }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    .header-user:hover { background: rgba(255,255,255,0.08); }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #818cf8, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .user-name {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ===========================
+       Metrics Bar
+    =========================== */
+    .metrics-bar {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 24px;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+    }
+
+    .metric-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      flex-shrink: 0;
+      min-width: 120px;
+    }
+
+    .metric-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .metric-info { line-height: 1.2; }
+
+    .metric-count {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--color-text);
+      display: block;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    /* ===========================
+       Filters Bar
+    =========================== */
+    .filters-bar {
+      padding: 12px 24px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .filter-search svg { color: var(--color-text-muted); flex-shrink: 0; }
+
+    .filter-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      color: var(--color-text);
+      width: 100%;
+    }
+
+    .filter-search input::placeholder { color: var(--color-text-muted); }
+
+    .filter-select {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      font-size: 13px;
+      color: var(--color-text);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .filter-select:focus { border-color: var(--color-primary); }
+
+    /* ===========================
+       Kanban Board
+    =========================== */
+    .kanban-wrapper {
+      padding: 20px 24px;
+      overflow-x: auto;
+    }
+
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(270px, 1fr));
+      gap: 16px;
+      min-width: 1080px;
+    }
+
+    .kanban-col {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 260px);
+      overflow: hidden;
+    }
+
+    .kanban-col-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .col-title {
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .col-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .col-backlog .col-dot { background: #94a3b8; }
+    .col-aprovacao .col-dot { background: #f59e0b; }
+    .col-andamento .col-dot { background: #3b82f6; }
+    .col-concluido .col-dot { background: #10b981; }
+
+    .col-count {
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      padding: 2px 8px;
+      border-radius: 20px;
+      color: var(--color-text-muted);
+    }
+
+    .kanban-cards {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Scrollbar */
+    .kanban-cards::-webkit-scrollbar { width: 4px; }
+    .kanban-cards::-webkit-scrollbar-track { background: transparent; }
+    .kanban-cards::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+
+    /* ===========================
+       Demand Card
+    =========================== */
+    .demand-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.3s;
+      animation: cardIn 0.3s ease-out both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demand-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--card-accent, var(--color-border));
+      border-radius: 10px 0 0 10px;
+    }
+
+    .demand-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .demand-card.hidden { display: none; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .card-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-dev { background: var(--color-dev-bg); color: var(--color-dev); }
+    .badge-suporte { background: var(--color-suporte-bg); color: var(--color-suporte); }
+
+    .badge-critica { background: var(--color-critica-bg); color: var(--color-critica); }
+    .badge-alta { background: var(--color-alta-bg); color: var(--color-alta); }
+    .badge-media { background: var(--color-media-bg); color: var(--color-media); }
+    .badge-baixa { background: var(--color-baixa-bg); color: var(--color-baixa); }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 10px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .card-focal {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .focal-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #818cf8, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-date {
+      font-size: 10px;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .card-badges {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    /* ===========================
+       Empty State
+    =========================== */
+    .empty-col {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--color-text-muted);
+      font-size: 12px;
+      display: none;
+    }
+
+    .empty-col.visible { display: block; }
+
+    .empty-col-icon { font-size: 28px; margin-bottom: 8px; }
+
+    /* ===========================
+       Modal
+    =========================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      width: 100%;
+      max-width: 540px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      animation: modalIn 0.2s ease-out;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(-8px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      font-size: 20px;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      line-height: 1;
+      transition: background 0.15s;
+    }
+
+    .modal-close:hover { background: var(--color-bg); }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--color-text);
+      background: var(--color-surface);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .btn-cancel {
+      padding: 8px 18px;
+      border: 1px solid var(--color-border);
+      background: transparent;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: background 0.15s;
+    }
+
+    .btn-cancel:hover { background: var(--color-bg); }
+
+    .btn-submit {
+      padding: 8px 20px;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+
+    .btn-submit:hover { background: var(--color-primary-hover); }
+
+    /* ===========================
+       Tooltip
+    =========================== */
+    [data-tooltip] {
+      position: relative;
+    }
+
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #fff;
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 50;
+      max-width: 240px;
+      white-space: normal;
+      text-align: center;
+    }
+
+    [data-tooltip]:hover::after { opacity: 1; }
+
+    /* ===========================
+       Responsivo
+    =========================== */
+    @media (max-width: 768px) {
+      .header { padding: 0 16px; }
+      .header-nav { display: none; }
+      .user-name { display: none; }
+      .header-logo-text { font-size: 14px; }
+
+      .metrics-bar { padding: 10px 16px; }
+      .filters-bar { padding: 10px 16px; }
+      .kanban-wrapper { padding: 12px 16px; }
+
+      .metric-card { min-width: 110px; }
+    }
+
+    /* No-results message */
+    .no-results {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--color-text-muted);
+      display: none;
+    }
+
+    .no-results.visible { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ===========================
+     HEADER
+=========================== -->
+<header class="header">
+  <div class="header-logo">
+    <!-- Logo SVG inline -->
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <rect width="28" height="28" rx="8" fill="#4f46e5"/>
+      <path d="M7 14L12 19L21 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="header-logo-text">Demandas <span>TI</span></span>
+  </div>
+
+  <nav class="header-nav" role="navigation" aria-label="Painéis">
+    <button class="nav-btn active" aria-current="page">Painel TI</button>
+    <button class="nav-btn">Painel Segurança</button>
+  </nav>
+
+  <div class="header-spacer"></div>
+
+  <div class="header-actions">
+    <button class="btn-nova" id="btnNovaDemanda" aria-label="Nova Demanda">
+      <!-- Plus icon -->
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Nova Demanda
+    </button>
+
+    <div class="header-user" title="Julielle Pereira de Sa Santos">
+      <div class="user-avatar" aria-hidden="true">JP</div>
+      <span class="user-name">Julielle Pereira</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===========================
+     BARRA DE MÉTRICAS
+=========================== -->
+<section class="metrics-bar" aria-label="Métricas">
+  <div class="metric-card">
+    <div class="metric-icon" style="background:#ede9fe;" aria-hidden="true">📋</div>
+    <div class="metric-info">
+      <span class="metric-count" data-target="41" data-count="0">0</span>
+      <span class="metric-label">Total</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-icon" style="background:#dbeafe;" aria-hidden="true">⚡</div>
+    <div class="metric-info">
+      <span class="metric-count" data-target="12" data-count="0">0</span>
+      <span class="metric-label">Em Andamento</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-icon" style="background:#dcfce7;" aria-hidden="true">✅</div>
+    <div class="metric-info">
+      <span class="metric-count" data-target="19" data-count="0">0</span>
+      <span class="metric-label">Concluídas</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-icon" style="background:#fee2e2;" aria-hidden="true">🔴</div>
+    <div class="metric-info">
+      <span class="metric-count" data-target="11" data-count="0">0</span>
+      <span class="metric-label">Críticas</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-icon" style="background:#fef9c3;" aria-hidden="true">⚠️</div>
+    <div class="metric-info">
+      <span class="metric-count" data-target="7" data-count="0">0</span>
+      <span class="metric-label">Com Pendências</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-icon" style="background:#f0fdf4;" aria-hidden="true">🎯</div>
+    <div class="metric-info">
+      <span class="metric-count" data-target="11" data-count="0">0</span>
+      <span class="metric-label">No Tático</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     BARRA DE FILTROS
+=========================== -->
+<section class="filters-bar" aria-label="Filtros">
+  <!-- Campo de busca -->
+  <div class="filter-search" role="search">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M10 10l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Buscar por tema ou número…" aria-label="Buscar demandas" />
+  </div>
+
+  <!-- Filtro Área -->
+  <select class="filter-select" id="filterArea" aria-label="Filtrar por área">
+    <option value="">Todas as Áreas</option>
+    <option value="DEV">DEV</option>
+    <option value="Suporte">Suporte</option>
+  </select>
+
+  <!-- Filtro Prioridade -->
+  <select class="filter-select" id="filterPrioridade" aria-label="Filtrar por prioridade">
+    <option value="">Todas as Prioridades</option>
+    <option value="Crítica">Crítica</option>
+    <option value="Alta">Alta</option>
+    <option value="Média">Média</option>
+    <option value="Baixa">Baixa</option>
+  </select>
+</section>
+
+<!-- ===========================
+     QUADRO KANBAN
+=========================== -->
+<main class="kanban-wrapper" role="main">
+  <div class="kanban-board" id="kanbanBoard">
+
+    <!-- Coluna: Backlog -->
+    <div class="kanban-col col-backlog" id="col-backlog">
+      <div class="kanban-col-header">
+        <span class="col-title">
+          <span class="col-dot" aria-hidden="true"></span>
+          Backlog
+        </span>
+        <span class="col-count" id="count-backlog">0</span>
+      </div>
+      <div class="kanban-cards" id="cards-backlog" aria-label="Coluna Backlog"></div>
+      <div class="empty-col" id="empty-backlog">
+        <div class="empty-col-icon" aria-hidden="true">📭</div>
+        Nenhuma demanda
+      </div>
+    </div>
+
+    <!-- Coluna: Aguardando Aprovação -->
+    <div class="kanban-col col-aprovacao" id="col-aprovacao">
+      <div class="kanban-col-header">
+        <span class="col-title">
+          <span class="col-dot" aria-hidden="true"></span>
+          Aguardando Aprovação
+        </span>
+        <span class="col-count" id="count-aprovacao">0</span>
+      </div>
+      <div class="kanban-cards" id="cards-aprovacao" aria-label="Coluna Aguardando Aprovação"></div>
+      <div class="empty-col" id="empty-aprovacao">
+        <div class="empty-col-icon" aria-hidden="true">📭</div>
+        Nenhuma demanda
+      </div>
+    </div>
+
+    <!-- Coluna: Em Andamento -->
+    <div class="kanban-col col-andamento" id="col-andamento">
+      <div class="kanban-col-header">
+        <span class="col-title">
+          <span class="col-dot" aria-hidden="true"></span>
+          Em Andamento
+        </span>
+        <span class="col-count" id="count-andamento">0</span>
+      </div>
+      <div class="kanban-cards" id="cards-andamento" aria-label="Coluna Em Andamento"></div>
+      <div class="empty-col" id="empty-andamento">
+        <div class="empty-col-icon" aria-hidden="true">📭</div>
+        Nenhuma demanda
+      </div>
+    </div>
+
+    <!-- Coluna: Concluído -->
+    <div class="kanban-col col-concluido" id="col-concluido">
+      <div class="kanban-col-header">
+        <span class="col-title">
+          <span class="col-dot" aria-hidden="true"></span>
+          Concluído
+        </span>
+        <span class="col-count" id="count-concluido">0</span>
+      </div>
+      <div class="kanban-cards" id="cards-concluido" aria-label="Coluna Concluído"></div>
+      <div class="empty-col" id="empty-concluido">
+        <div class="empty-col-icon" aria-hidden="true">📭</div>
+        Nenhuma demanda
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ===========================
+     MODAL: Nova Demanda
+=========================== -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Nova Demanda</h2>
+      <button class="modal-close" id="modalClose" aria-label="Fechar modal">&#10005;</button>
+    </div>
+
+    <form id="novaDemandaForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="fTema">Tema / Descrição</label>
+        <input class="form-input" type="text" id="fTema" placeholder="Descreva a demanda…" required />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fArea">Área</label>
+          <select class="form-select" id="fArea">
+            <option>DEV</option>
+            <option>Suporte</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fPrioridade">Prioridade</label>
+          <select class="form-select" id="fPrioridade">
+            <option>Crítica</option>
+            <option>Alta</option>
+            <option>Média</option>
+            <option>Baixa</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fStatus">Status TI</label>
+          <select class="form-select" id="fStatus">
+            <option>Backlog</option>
+            <option>Aguardando Aprovação</option>
+            <option>Em andamento</option>
+            <option>Concluída</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fMes">Mês/Ano</label>
+          <input class="form-input" type="month" id="fMes" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="fFocal">Ponto Focal</label>
+        <input class="form-input" type="text" id="fFocal" placeholder="Nome do responsável…" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" id="btnCancelar">Cancelar</button>
+        <button type="submit" class="btn-submit">Criar Demanda</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+  /* ----------------------------
+     Dados das Demandas
+  ---------------------------- */
+  const demandas = [
+    { id: 49, area: 'Suporte', tema: 'Implantação de Controle e Rastreamento', prioridade: 'Alta',    status: 'Backlog',              mes: 'Julho/2026',    focal: 'Lucival Klaydson'   },
+    { id: 47, area: 'DEV',     tema: 'Serviço SAP Custo Médio',                prioridade: 'Alta',    status: 'Backlog',              mes: 'Julho/2026',    focal: 'Jose Borba'          },
+    { id: 46, area: 'DEV',     tema: 'Conciliador PBM – Ajuste no Processo',   prioridade: 'Crítica', status: 'Aguardando Aprovação', mes: 'Julho/2026',    focal: 'Fabio Martins'       },
+    { id: 45, area: 'DEV',     tema: 'Crawler de Imagens de Produtos',          prioridade: 'Alta',    status: 'Em andamento',         mes: 'Julho/2026',    focal: 'Humberto Erler'      },
+    { id: 43, area: 'DEV',     tema: 'Revisão da Arquitetura de Sincronização', prioridade: 'Crítica', status: 'Em andamento',         mes: 'Agosto/2026',   focal: 'Alexandre Henrique'  },
+    { id: 42, area: 'DEV',     tema: 'Hub de Imagens – Ajustes e Melhorias',   prioridade: 'Alta',    status: 'Concluída',            mes: 'Junho/2026',    focal: 'Alexandre Henrique'  },
+    { id: 41, area: 'DEV',     tema: 'Pipeline de Dados Analytics',             prioridade: 'Média',   status: 'Em andamento',         mes: 'Julho/2026',    focal: 'Bruno Souza'         },
+    { id: 40, area: 'Suporte', tema: 'Atualização de Certificados SSL',         prioridade: 'Alta',    status: 'Concluída',            mes: 'Junho/2026',    focal: 'Carla Mendes'        },
+    { id: 39, area: 'DEV',     tema: 'Integração API Marketplace',              prioridade: 'Crítica', status: 'Em andamento',         mes: 'Agosto/2026',   focal: 'Pedro Lima'          },
+    { id: 38, area: 'DEV',     tema: 'Refatoração Módulo Financeiro',           prioridade: 'Média',   status: 'Backlog',              mes: 'Setembro/2026', focal: 'Ana Paula'           },
+  ];
+
+  /* Mapeamento de status para coluna */
+  const statusToCol = {
+    'Backlog':              'backlog',
+    'Aguardando Aprovação': 'aprovacao',
+    'Em andamento':         'andamento',
+    'Concluída':            'concluido',
+  };
+
+  /* Cor de destaque lateral do card por prioridade */
+  const prioAccent = {
+    'Crítica': '#dc2626',
+    'Alta':    '#ea580c',
+    'Média':   '#2563eb',
+    'Baixa':   '#16a34a',
+  };
+
+  /* ----------------------------
+     Gerar iniciais do focal
+  ---------------------------- */
+  function initials(name) {
+    return name.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase();
+  }
+
+  /* ----------------------------
+     Renderizar card
+  ---------------------------- */
+  function renderCard(d) {
+    const accentColor = prioAccent[d.prioridade] || '#94a3b8';
+    const areaBadgeClass = d.area === 'DEV' ? 'badge-dev' : 'badge-suporte';
+    const prioBadgeClass = `badge-${d.prioridade.toLowerCase().replace('é','e').replace('í','i')}`;
+
+    const card = document.createElement('article');
+    card.className = 'demand-card';
+    card.dataset.id = d.id;
+    card.dataset.area = d.area;
+    card.dataset.prioridade = d.prioridade;
+    card.dataset.tema = d.tema.toLowerCase();
+    card.dataset.status = d.status;
+    card.style.setProperty('--card-accent', accentColor);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Demanda ${d.id}: ${d.tema}`);
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-num">#${d.id}</span>
+        <span class="badge ${areaBadgeClass}">${d.area}</span>
+      </div>
+      <div class="card-badges">
+        <span class="badge ${prioBadgeClass}">${d.prioridade}</span>
+      </div>
+      <p class="card-title" data-tooltip="${d.tema}">${d.tema}</p>
+      <div class="card-footer">
+        <span class="card-focal">
+          <span class="focal-avatar" aria-hidden="true">${initials(d.focal)}</span>
+          ${d.focal.split(' ')[0]}
+        </span>
+        <span class="card-date">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <rect x="1" y="1.5" width="8" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M3.5 1v1M6.5 1v1M1 4h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          ${d.mes}
+        </span>
+      </div>
+    `;
+
+    return card;
+  }
+
+  /* ----------------------------
+     Renderizar todas as colunas
+  ---------------------------- */
+  function renderAll(data) {
+    const cols = ['backlog', 'aprovacao', 'andamento', 'concluido'];
+
+    // Limpar colunas
+    cols.forEach(col => {
+      document.getElementById(`cards-${col}`).innerHTML = '';
+    });
+
+    // Contadores por coluna
+    const counts = { backlog: 0, aprovacao: 0, andamento: 0, concluido: 0 };
+
+    data.forEach(d => {
+      const col = statusToCol[d.status];
+      if (!col) return;
+      const container = document.getElementById(`cards-${col}`);
+      if (container) {
+        container.appendChild(renderCard(d));
+        counts[col]++;
+      }
+    });
+
+    // Atualizar contadores e estados vazios
+    cols.forEach(col => {
+      document.getElementById(`count-${col}`).textContent = counts[col];
+      const emptyEl = document.getElementById(`empty-${col}`);
+      if (emptyEl) {
+        emptyEl.classList.toggle('visible', counts[col] === 0);
+      }
+    });
+  }
+
+  /* ----------------------------
+     Filtros
+  ---------------------------- */
+  function applyFilters() {
+    const search = document.getElementById('searchInput').value.toLowerCase().trim();
+    const area   = document.getElementById('filterArea').value;
+    const prio   = document.getElementById('filterPrioridade').value;
+
+    const filtered = demandas.filter(d => {
+      const matchSearch = !search || d.tema.toLowerCase().includes(search) || String(d.id).includes(search);
+      const matchArea   = !area   || d.area === area;
+      const matchPrio   = !prio   || d.prioridade === prio;
+      return matchSearch && matchArea && matchPrio;
+    });
+
+    renderAll(filtered);
+  }
+
+  /* ----------------------------
+     Counter-up Animation
+  ---------------------------- */
+  function animateCounters() {
+    const counters = document.querySelectorAll('[data-target]');
+    const duration = 900;
+
+    counters.forEach(el => {
+      const target = parseInt(el.dataset.target, 10);
+      const start  = Date.now();
+
+      function update() {
+        const elapsed = Date.now() - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease-out quad
+        const eased = 1 - (1 - progress) * (1 - progress);
+        el.textContent = Math.round(eased * target);
+
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+      }
+
+      requestAnimationFrame(update);
+    });
+  }
+
+  /* ----------------------------
+     Modal
+  ---------------------------- */
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.getElementById('fTema').focus();
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.getElementById('novaDemandaForm').reset();
+  }
+
+  /* ----------------------------
+     Inicialização
+  ---------------------------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Renderizar demandas iniciais
+    renderAll(demandas);
+
+    // Animar contadores
+    animateCounters();
+
+    // Event listeners dos filtros
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    document.getElementById('filterArea').addEventListener('change', applyFilters);
+    document.getElementById('filterPrioridade').addEventListener('change', applyFilters);
+
+    // Modal
+    document.getElementById('btnNovaDemanda').addEventListener('click', openModal);
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('btnCancelar').addEventListener('click', closeModal);
+
+    // Fechar modal ao clicar fora
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    });
+
+    // Fechar modal com Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Submit do formulário (simulado)
+    document.getElementById('novaDemandaForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const tema = document.getElementById('fTema').value.trim();
+      if (!tema) {
+        document.getElementById('fTema').focus();
+        document.getElementById('fTema').style.borderColor = 'var(--color-critica)';
+        return;
+      }
+
+      // Criar nova demanda simulada
+      const maxId = Math.max(...demandas.map(d => d.id));
+      const novaDemanda = {
+        id:         maxId + 1,
+        area:       document.getElementById('fArea').value,
+        tema,
+        prioridade: document.getElementById('fPrioridade').value,
+        status:     document.getElementById('fStatus').value,
+        mes:        formatMes(document.getElementById('fMes').value),
+        focal:      document.getElementById('fFocal').value || 'A definir',
+      };
+
+      demandas.unshift(novaDemanda);
+      applyFilters();
+      closeModal();
+    });
+
+    // Navegação entre painéis (simulado)
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.nav-btn').forEach(b => {
+          b.classList.remove('active');
+          b.removeAttribute('aria-current');
+        });
+        this.classList.add('active');
+        this.setAttribute('aria-current', 'page');
+      });
+    });
+  });
+
+  /* ----------------------------
+     Formatar mês do input
+  ---------------------------- */
+  function formatMes(value) {
+    if (!value) return 'A definir';
+    const [year, month] = value.split('-');
+    const months = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+                    'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    return `${months[parseInt(month, 10) - 1]}/${year}`;
+  }
+</script>
+
+</body>
+</html>
